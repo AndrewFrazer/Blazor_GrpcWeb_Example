@@ -1,0 +1,23 @@
+﻿@page "/"
+@inject GreeterService greeterService
+
+<h1>@greeting</h1>
+
+Welcome to your new app.
+
+<div class="input-group mb-3">
+    <input class="form-control" @bind="name" placeholder="Type your name" aria-label="Recipient's username" aria-describedby="basic-addon2">
+    <div class="input-group-append">
+        <button @onclick="OnClick_SendGreetingName" class="btn btn-outline-secondary" type="button">Request Greeting</button>
+    </div>
+</div>
+
+@functions {
+    private string name;
+    private string greeting = "Hello, world!";
+
+    private async Task OnClick_SendGreetingName()
+    {
+        greeting = await greeterService.GetGreetingAsync(name);
+    }
+}
